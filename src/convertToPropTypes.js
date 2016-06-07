@@ -50,7 +50,7 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
       resultPropType = {type: 'object'};
     }
     else {
-      resultPropType = {type: 'any'};
+      resultPropType = {type: 'instanceOf', of: node.id.name};
     }
   }
   else if (node.type === 'UnionTypeAnnotation') {

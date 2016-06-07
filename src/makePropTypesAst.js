@@ -61,6 +61,12 @@ function makePropType(data) {
   else if (method === 'void') {
     node = dontSetTemplate().expression;
   }
+  else if (method === 'instanceOf') {
+    node = t.callExpression(
+      t.memberExpression(node, t.identifier('instanceOf')),
+      [t.identifier(data.of)]
+    )
+  }
   else {
     $debug('Unknown node ' + JSON.stringify(data, null, 2));
     throw new Error(`${PLUGIN_NAME} processing error: This is an internal error that should never happen. ` +
