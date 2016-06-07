@@ -3,7 +3,7 @@ import * as t from 'babel-types';
 import template from 'babel-template';
 
 export default function makePropTypesAst(propTypeData) {
-  const rootProperties = propTypeData.properties.map(({key, value}) => {
+  const rootProperties = (propTypeData.properties || []).map(({key, value}) => {
     return t.objectProperty(
       t.identifier(key),
       makePropType(value)
@@ -28,7 +28,7 @@ function makePropType(data) {
     isRequired = false;
   }
   else if (method === 'shape') {
-    const shapeObjectProperties = data.properties.map(({key, value}) => {
+    const shapeObjectProperties = (data.properties || {}).map(({key, value}) => {
       return t.objectProperty(
         t.identifier(key),
         makePropType(value)
